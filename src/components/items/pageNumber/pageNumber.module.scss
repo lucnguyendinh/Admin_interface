@@ -1,0 +1,19 @@
+.page {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    .page-number {
+        width: 30px;
+        height: 30px;
+        background-color: #292e32;
+        color: #87898c;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 4px;
+        cursor: pointer;
+    }
+    .active {
+        color: #ffffff;
+    }
+}

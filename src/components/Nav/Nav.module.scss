@@ -3,5 +3,29 @@
 .wrapper {
     width: 240px;
     min-height: calc(100vh - 56px);
-    background-color: $background-primary;
+    background-color: #212529;
+    color: #ffffff;
+    padding: 16px 0 0 8px;
+    h3 {
+        color: #5a5e61;
+        margin: 16px 0;
+    }
+}
+
+.dashboard,
+.history,
+.notification {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    margin: 8px 0;
+    color: #87898c;
+    cursor: pointer;
+    .icon {
+        margin-right: 8px;
+    }
+}
+
+.active {
+    color: #ffffff;
 }

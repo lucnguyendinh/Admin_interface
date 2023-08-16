@@ -1,0 +1,55 @@
+.item-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+    margin-bottom: 4px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    .avt-name {
+        display: flex;
+        align-items: center;
+        .name {
+            margin-left: 8px;
+        }
+    }
+    .icon {
+        cursor: pointer;
+        position: relative;
+        .togle {
+            width: 400px;
+            background-color: #f5f8fb;
+            border-radius: 4px;
+            padding: 4px 8px;
+            position: absolute;
+            bottom: 30px;
+            right: 16px;
+            border: #000000 2px solid;
+            .name-id {
+                padding-left: 4px;
+                position: relative;
+                height: 25px;
+
+                &::before {
+                    content: '';
+                    height: 1px;
+                    width: 399px;
+                    background-color: rgb(17, 19, 19);
+                    position: absolute;
+                    top: 25px;
+                    left: -9px;
+                }
+            }
+            .option {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                padding-left: 4px;
+                &:hover {
+                    border-radius: 4px;
+                    background-color: #f0f2f5;
+                }
+            }
+        }
+    }
+}

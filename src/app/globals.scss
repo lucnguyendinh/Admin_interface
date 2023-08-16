@@ -9,6 +9,27 @@ $base-color: #f0f2f5;
 
 body {
     background-color: $base-color;
+    overflow-y: auto;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+input {
+    background-color: transparent;
+}
+
+input:focus {
+    outline: none;
+}
+
+textarea {
+    resize: none;
+}
+textarea:focus {
+    outline: none;
 }
 
 //Scrollbar

@@ -4,6 +4,7 @@
 .vscode
 .prettierrc
 .env
+/note
 
 # dependencies
 /node_modules

@@ -1,0 +1,26 @@
+.wrapper {
+    padding: 16px 40px 0 8px;
+}
+
+.item-history {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+    margin-bottom: 4px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    .admin {
+        display: flex;
+        align-items: center;
+        .name {
+            margin-left: 8px;
+        }
+    }
+    .user-info {
+        display: flex;
+        .name-user {
+            margin-right: 8px;
+        }
+    }
+}
