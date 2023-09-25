@@ -1,7 +1,6 @@
 .item-user {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 8px 24px;
     margin-bottom: 4px;
     background-color: #ffffff;
@@ -9,21 +8,37 @@
     .avt-name {
         display: flex;
         align-items: center;
+        width: 50%;
         .name {
             margin-left: 8px;
         }
     }
+    .sex {
+        width: 20%;
+    }
+    .point {
+        width: 20%;
+    }
+    .status {
+        width: 20%;
+    }
     .icon {
         cursor: pointer;
         position: relative;
+        display: flex;
+        justify-content: center;
+        &:hover .togle {
+            display: block;
+        }
         .togle {
+            display: none;
+            z-index: 10;
             width: 400px;
             background-color: #f5f8fb;
             border-radius: 4px;
             padding: 4px 8px;
             position: absolute;
-            bottom: 30px;
-            right: 16px;
+            right: 0;
             border: #000000 2px solid;
             .name-id {
                 padding-left: 4px;
@@ -48,6 +63,13 @@
                 &:hover {
                     border-radius: 4px;
                     background-color: #f0f2f5;
+                }
+            }
+            .disable {
+                cursor: not-allowed;
+                &:hover {
+                    border-radius: 0;
+                    background-color: #f5f8fb;
                 }
             }
         }

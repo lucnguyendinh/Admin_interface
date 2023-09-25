@@ -1,11 +1,45 @@
+'use client';
+
 import classNames from 'classnames/bind';
 
 import styles from './Header.module.scss';
 import Ic from '../items/icon';
+import { useEffect, useState } from 'react';
+import noAvt from '@/public/non-avt.jpg';
+
+import Img from '../items/img';
+import useDebounce from '@/hook/useDebounce';
 
 const cx = classNames.bind(styles);
 
+type User = {
+    idUser: string;
+    fullName: string;
+    avtImg: {
+        url: string;
+    };
+};
+
 export default function Header() {
+    const [search, setSearch] = useState('');
+    const [dataUser, setDataUser] = useState<User[]>([]);
+
+    const debounce = useDebounce(search, 500);
+
+    useEffect(() => {
+        const searchByName = async () => {
+            const res = await fetch(`http://localhost:8000/admin/searchbyname?name=${encodeURIComponent(debounce)}`, {
+                cache: 'no-store',
+            });
+            setDataUser(await res.json());
+        };
+        if (!debounce.trim()) {
+            setDataUser([]);
+            return;
+        }
+        if (debounce) searchByName();
+    }, [debounce]);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('brand')}>
@@ -17,7 +51,12 @@ export default function Header() {
                 </div>
                 <div className={cx('search-and-logout')}>
                     <div className={cx('search')}>
-                        <input type="text" placeholder="Search for..." />
+                        <input
+                            type="text"
+                            placeholder="Search for..."
+                            onChange={(e) => setSearch(e.target.value)}
+                            value={search}
+                        />
                         <Ic
                             color="#ffffff"
                             className={cx('icon-search')}
@@ -25,6 +64,21 @@ export default function Header() {
                             width="35"
                             height="35"
                         />
+                        {dataUser.length > 0 && (
+                            <div className={cx('tab-search')}>
+                                {dataUser?.map((d, i) => {
+                                    return (
+                                        <div className={cx('user-item')} key={i}>
+                                            <Img src={d?.avtImg?.url || noAvt} alt="anh-dep" width={50} height={50} />
+                                            <div className={cx('name-id')}>
+                                                <h4 className={cx('name')}>{d?.fullName}</h4>
+                                                <p className="id">{d?.idUser}</p>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
                     <div className={cx('logout')}>
                         <h3>Đăng xuất</h3>
