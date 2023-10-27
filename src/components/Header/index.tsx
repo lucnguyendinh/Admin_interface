@@ -28,16 +28,43 @@ export default function Header() {
 
     useEffect(() => {
         const searchByName = async () => {
-            const res = await fetch(`http://localhost:8000/admin/searchbyname?name=${encodeURIComponent(debounce)}`, {
-                cache: 'no-store',
-            });
-            setDataUser(await res.json());
+            try {
+                const res = await fetch(
+                    `http://localhost:8000/admin/searchbyname?name=${encodeURIComponent(debounce)}`,
+                    {
+                        cache: 'no-store',
+                    },
+                );
+                // setDataUser(await res.json());
+                const data = await res.json();
+                return data;
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        const searchById = async () => {
+            try {
+                const res = await fetch(`http://localhost:8000/admin/searchbyid?id=${encodeURIComponent(debounce)}`, {
+                    cache: 'no-store',
+                });
+                const data = await res.json();
+                return data;
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        const mergeData = async () => {
+            const listUserName = await searchByName();
+            const listUserId = await searchById();
+            console.log({ listUserName, listUserId });
+
+            setDataUser([...listUserName, ...listUserId]);
         };
         if (!debounce.trim()) {
             setDataUser([]);
             return;
         }
-        if (debounce) searchByName();
+        if (debounce) mergeData();
     }, [debounce]);
 
     return (
