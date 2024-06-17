@@ -29,12 +29,12 @@ export default async function Notification() {
         if (option === 1) {
             return {
                 option: 'người dùng',
-                url: 'http://localhost:3001/profile',
+                url: 'http://localhost:3000/profile',
             };
         } else if (option === 2) {
             return {
                 option: 'bài viết',
-                url: 'http://localhost:3001/status',
+                url: 'http://localhost:3000/status',
             };
         } else if (option === 3) {
             return {

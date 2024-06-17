@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import classNames from 'classnames/bind';
 
 import styles from './pageNumber.module.scss';
@@ -7,35 +7,31 @@ import styles from './pageNumber.module.scss';
 const cx = classNames.bind(styles);
 
 type Props = {
-    totalPages: number | undefined;
+    totalPages: number;
     page: string;
 };
 
 export default function PageNumber(props: Props) {
-    const { totalPages, page } = props;
+    const { totalPages = 1, page } = props;
     const router = useRouter();
 
-    let pageActive;
-    if (pageActive !== null) {
-        pageActive = parseInt(page);
-    }
+    const handleBeforePage = () => {
+        if (+page <= 1) return;
+        router.push(`?page=${+page - 1}`, { scroll: false });
+    };
+    const handleAfterPage = () => {
+        if (+page >= totalPages) return;
+        router.push(`?page=${+page + 1}`, { scroll: false });
+    };
 
-    let items = [];
-    if (totalPages) {
-        for (let i = 1; i <= totalPages; i++) {
-            items.push(
-                <div
-                    onClick={() => router.push(`?page=${i}`, { scroll: false })}
-                    key={i}
-                    className={cx('page-number', {
-                        active: pageActive === i,
-                    })}
-                >
-                    <p>{i}</p>
-                </div>,
-            );
-        }
-    }
-
-    return <div className={cx('page')}>{items}</div>;
+    return (
+        <div className={cx('page')}>
+            <div className={cx('before')} onClick={handleBeforePage}>
+                Trang trước
+            </div>
+            <div className={cx('after')} onClick={handleAfterPage}>
+                Trang sau
+            </div>
+        </div>
+    );
 }
